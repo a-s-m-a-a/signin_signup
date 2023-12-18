@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../reusable_widgets/reusable_widgets.dart';
 import '../utils/color_utils.dart';
+import 'home_screen.dart';
 import 'log_in.dart';
 
 class SignUp extends StatefulWidget {
@@ -65,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                             true, Icons.password, "Confirm password"),
                         Padding(
                           padding: const EdgeInsets.all(20),
-                          child: reusableButton(width, 50, "SIGN UP", () {}),
+                          child: reusableButton(width, 50, "SIGN UP",functionButton(context, const HomePage(), true)),
                         ),
                       ],
                     ),

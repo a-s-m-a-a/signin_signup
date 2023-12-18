@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:signin_signup/reusable_widgets/reusable_widgets.dart';
+import 'package:signin_signup/screens/home_screen.dart';
 import 'package:signin_signup/screens/sign_up.dart';
-
 import '../utils/color_utils.dart';
 
 class LogIn extends StatefulWidget {
@@ -12,8 +12,6 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  final TextEditingController _userNameController = TextEditingController();
-  final TextEditingController _passwordTextController = TextEditingController();
   late double width = MediaQuery.of(context).size.width;
   late double height = MediaQuery.of(context).size.height;
   @override
@@ -58,12 +56,15 @@ class _LogInState extends State<LogIn> {
                     ),
                     child: Column(
                       children: [
-                        reusableTextField( false, Icons.person_outline, "Enter your username"),
-                        reusableTextField( true, Icons.password, "Enter your password"),
-                        richText(1, ["Forget Password?"], [Colors.black], [(){}] ),
+                        reusableTextField(
+                            false, Icons.person_outline, "Enter your username"),
+                        reusableTextField(
+                            true, Icons.password, "Enter your password"),
+                        richText(
+                            1, ["Forget Password?"], [Colors.black], [() {}]),
                         Padding(
                           padding: const EdgeInsets.all(20),
-                          child: reusableButton(width, 50, "SIGN IN", (){}),
+                          child: reusableButton(width, 50, "SIGN IN", functionButton(context,const HomePage(),true)),
                         ),
                       ],
                     ),
@@ -74,7 +75,19 @@ class _LogInState extends State<LogIn> {
           ),
         ),
       ),
-      floatingActionButton: richText(2, ["Don't have an account? ", "SIGN UP"], [Colors.grey, Colors.black],[(){},(){Navigator.push(context, MaterialPageRoute(builder: (context) => SignUp()));}]),
+      floatingActionButton: richText(2, [
+        "Don't have an account? ",
+        "SIGN UP"
+      ], [
+        Colors.grey,
+        Colors.black
+      ], [
+        () {},
+        () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const SignUp()));
+        }
+      ]),
     );
   }
 }
