@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/splash_screen.dart';
+import '../utils/color_utils.dart';
 
 Container reusableTextField(
     bool isPasswordType, IconData icon, String lableText) {
@@ -17,15 +18,16 @@ Container reusableTextField(
         keyboardType: isPasswordType
             ? TextInputType.visiblePassword
             : TextInputType.emailAddress,
-        style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         decoration: InputDecoration(
+          suffixIcon: isPasswordType? Icon(Icons.visibility_off): Icon(Icons.edit),
           prefixIcon: Icon(
             icon,
-            color: Colors.purple,
+            color: Colors.white,
           ),
           labelText: lableText,
           labelStyle:
-              const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           filled: false,
           floatingLabelBehavior: FloatingLabelBehavior.never,
         ),
@@ -41,7 +43,7 @@ Container reusableButton(
     height: height,
     margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(90.0),
+      borderRadius: BorderRadius.circular(30.0),
     ),
     child: ElevatedButton(
       onPressed: () {
@@ -50,9 +52,9 @@ Container reusableButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.pressed)) {
-            return Colors.white;
+            return hexStringToColor("#F45B00");
           }
-          return Colors.blue;
+          return Colors.transparent;
         }),
         foregroundColor: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.pressed)) {
@@ -60,10 +62,6 @@ Container reusableButton(
           }
           return Colors.white;
         }),
-        side: const MaterialStatePropertyAll(BorderSide(
-          width: 1.0,
-          color: Colors.white,
-        )),
         elevation: const MaterialStatePropertyAll(0),
       ),
       child: Text(
@@ -91,11 +89,11 @@ RichText richText(
   ]));
 }
 
-Function functionButton(var context, Widget pushToPage, bool isLogIn)  {
+Function splashFunction(var context, Widget pushToPage, bool isLogIn)  {
   fun ()async{
     var sharedPref = await SharedPreferences.getInstance();
     sharedPref.setBool(SplashScreenState.keyLogin, isLogIn);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => pushToPage));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => pushToPage));
   }
  return fun;
 }

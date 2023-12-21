@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:signin_signup/reusable_widgets/reusable_widgets.dart';
 import 'package:signin_signup/screens/home_screen.dart';
@@ -22,52 +24,54 @@ class _LogInState extends State<LogIn> {
         child: Container(
           width: width,
           height: height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              hexStringToColor("#2596be"),
-              hexStringToColor("#bee0ec"),
-            ], begin: Alignment.centerRight, end: Alignment.centerLeft),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/signin_or_signup_image.png"),
+              fit: BoxFit.cover,
+            ),
           ),
           child: Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 80),
             child: Column(
               children: [
-                const Expanded(
-                  flex: 1,
-                  child: ListTile(
-                    title: Text(
-                      "Hello\nSign In!",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 42,
+                Center(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(
+                      sigmaX: 1.0,
+                      sigmaY: 1.0,
+                    ),
+                    child: Container(
+                      width: 200,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.grey.withOpacity(.4),
+                      ),
+                      child: Column(
+                        children: [
+                          Image(image: AssetImage("assets/images/Logo/logo1.png"),height: 70,),
+                          Text("Daily Recipe", style: TextStyle(fontFamily: "Lemongrass", fontSize: 50, color: Colors.white,),)
+                        ],
                       ),
                     ),
-                    trailing: Icon(Icons.menu_outlined),
                   ),
                 ),
-                Expanded(
-                  flex: 5,
-                  child: Container(
-                    alignment: AlignmentDirectional.topStart,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Column(
-                      children: [
-                        reusableTextField(
-                            false, Icons.person_outline, "Enter your username"),
-                        reusableTextField(
-                            true, Icons.password, "Enter your password"),
-                        richText(
-                            1, ["Forget Password?"], [Colors.black], [() {}]),
-                        Padding(
-                          padding: const EdgeInsets.all(20),
-                          child: reusableButton(width, 50, "SIGN IN", functionButton(context,const HomePage(),true)),
-                        ),
-                      ],
-                    ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,10,0),
+                  child: Column(
+                    children: [
+                      Text("Sign In",style: TextStyle(fontSize: 30, color: Colors.white, fontWeight: FontWeight.bold,), ),
+                      reusableTextField(
+                          false, Icons.email, "Email Address"),
+                      reusableTextField(
+                          true, Icons.password, "Password"),
+                      richText(
+                          1, ["Forget Password?"], [hexStringToColor("#12819D")], [() {}]),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: reusableButton(width, 50, "Sign In", splashFunction(context,const HomePage(),true)),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -77,10 +81,10 @@ class _LogInState extends State<LogIn> {
       ),
       floatingActionButton: richText(2, [
         "Don't have an account? ",
-        "SIGN UP"
+        "Register"
       ], [
-        Colors.grey,
-        Colors.black
+        Colors.white,
+        hexStringToColor("#F45B00")
       ], [
         () {},
         () {

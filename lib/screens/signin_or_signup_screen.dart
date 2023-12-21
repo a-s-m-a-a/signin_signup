@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:signin_signup/reusable_widgets/reusable_widgets.dart';
 import 'package:signin_signup/screens/log_in.dart';
@@ -23,34 +25,70 @@ class _SigninOrSignupPageState extends State<SigninOrSignupPage> {
         child: Container(
           width: width,
           height: height,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              hexStringToColor("#2596be"),
-              hexStringToColor("#bee0ec"),
-            ], begin: Alignment.centerRight, end: Alignment.centerLeft),
-          ),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                20, MediaQuery.of(context).size.height * 0.2, 20, 0),
-            child: Column(
-              children: [
-                const Text(
-                  "Welcome Back",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 42),
-                ),
-                reusableButton(width, 50, "SIGN IN", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const LogIn()));
-                }),
-                reusableButton(width, 50, "SIGN UP", () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const SignUp()));
-                }),
-              ],
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/signin_or_signup_image.png"),
+              fit: BoxFit.cover,
             ),
+          ),
+          child: Column(
+            children: [
+              Expanded(flex: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 250),
+                  child: Container(
+                    width: 150,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey.withOpacity(.4),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Image(
+                          image: AssetImage("assets/images/Logo/logo1.png"),
+                          height: 70,
+                        ),
+                        Text(
+                          "Daily Recipe",
+                          style: TextStyle(
+                            fontFamily: "Lemongrass",
+                            fontSize: 40,
+                            color: Colors.white,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const Text(
+                "cooking done the easy way",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              Expanded(flex:3,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    reusableButton(width, 60, "Register", () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const SignUp()));
+                  }),
+                    reusableButton(width, 60, "Sign In", () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const LogIn()));
+                    }),
+
+                  ],
+                ),
+              ),
+
+            ],
           ),
         ),
       ),

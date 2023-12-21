@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:signin_signup/reusable_widgets/reusable_widgets.dart';
+import 'package:signin_signup/screens/signin_or_signup_screen.dart';
+import 'package:signin_signup/screens/splash_screen.dart';
 import '../utils/color_utils.dart';
 import 'log_in.dart';
 
@@ -20,8 +23,11 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
-              functionButton(context, const LogIn(), false);
-               },
+              var sharedPref = await SharedPreferences.getInstance();
+              sharedPref.setBool(SplashScreenState.keyLogin, false);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SigninOrSignupPage()));
+
+            },
           )
         ],
       ),
