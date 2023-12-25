@@ -37,8 +37,8 @@ class Truck extends Car {
   }
 }
 
-class Bus extends Truck {
-  Bus(super.carGoCapacity, {required super.fuelEfficiency, required super.numOfSeats});
+class Bus extends Car {
+  Bus({required super.fuelEfficiency, required super.numOfSeats});
 
   @override
   double calculateFuelEfficiency() {
@@ -51,8 +51,8 @@ class Bus extends Truck {
   }
 }
 
-class MiniBus extends Bus {
-  MiniBus(super.carGoCapacity, {required super.fuelEfficiency, required super.numOfSeats});
+class MiniBus extends Car {
+  MiniBus( {required super.fuelEfficiency, required super.numOfSeats});
   @override
   double calculateFuelEfficiency() {
     return fuelEfficiency! * (1.0 / (1.0 + numOfSeats! / 10.0));
@@ -71,9 +71,9 @@ toyota.carSpeed();
 var camry = Truck(20, fuelEfficiency: 50, numOfSeats: 5);
 print(camry.calculateFuelEfficiency());
 print (camry.calculateDistanceTraveled());
-var toyotaBus = Bus(100, fuelEfficiency: 90, numOfSeats: 50);
+var toyotaBus = Bus(fuelEfficiency: 90, numOfSeats: 50);
 print(toyotaBus.calculateDistanceTraveled());
 
-var toyotaMiniBus = MiniBus(100, fuelEfficiency: 90, numOfSeats: 33);
+var toyotaMiniBus = MiniBus(fuelEfficiency: 90, numOfSeats: 33);
 print(toyotaMiniBus.calculateDistanceTraveled());
 }
